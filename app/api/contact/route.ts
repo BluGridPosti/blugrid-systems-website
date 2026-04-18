@@ -1,8 +1,7 @@
 import { Resend } from "resend";
+import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 type ContactPayload = {
   name: string;
@@ -26,6 +25,21 @@ function clean(value: unknown) {
 
 export async function POST(request: Request) {
   try {
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const to = process.env.CONTACT_TO_EMAIL;
+
+    if (!resendApiKey || !to) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Server email configuration is missing.",
+        },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(resendApiKey);
+
     const body = (await request.json()) as Partial<ContactPayload>;
 
     const payload: ContactPayload = {
@@ -55,7 +69,7 @@ export async function POST(request: Request) {
     const missing = requiredFields.filter((field) => !payload[field]);
 
     if (missing.length > 0) {
-      return Response.json(
+      return NextResponse.json(
         {
           ok: false,
           error: `Missing required fields: ${missing.join(", ")}`,
@@ -65,7 +79,7 @@ export async function POST(request: Request) {
     }
 
     if (!isValidEmail(payload.email)) {
-      return Response.json(
+      return NextResponse.json(
         {
           ok: false,
           error: "Please enter a valid email address.",
@@ -74,20 +88,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const to = process.env.CONTACT_TO_EMAIL;
-    const from = "BluGrid Website <onboarding@resend.dev>";
-
-    if (!process.env.RESEND_API_KEY || !to) {
-      return Response.json(
-        {
-          ok: false,
-          error: "Server email configuration is missing.",
-        },
-        { status: 500 }
-      );
-    }
-
     const subject = `New BluGrid system audit intake — ${payload.company}`;
+    const from = "BluGrid Website <onboarding@resend.dev>";
 
     const html = `
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
@@ -134,21 +136,20 @@ ${payload.outcome}
     });
 
     if (error) {
-      return Response.json(
+      return NextResponse.json(
         {
           ok: false,
           error: "Failed to send intake email.",
-          details: error,
         },
         { status: 500 }
       );
     }
 
-    return Response.json({ ok: true });
+    return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Contact route error:", error);
 
-    return Response.json(
+    return NextResponse.json(
       {
         ok: false,
         error: "Unexpected server error.",
