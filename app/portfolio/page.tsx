@@ -1,10 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import SiteShell from "@/components/layout/site-shell";
-import { portfolioCategories, portfolioProjects } from "@/lib/portfolio-data";
+import {
+  portfolioCategories,
+  portfolioProjects,
+} from "@/lib/portfolio-data";
 
 const featuredSlugs = [
   "isp-support-operations-console",
@@ -48,7 +50,8 @@ export default function PortfolioPage() {
           </div>
 
           <h1 className="mt-4 text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl md:text-6xl">
-            Systems, Platforms, And Digital Infrastructure Across 17 Project Builds.
+            Systems, Platforms, And Digital Infrastructure Across 17 Project
+            Builds.
           </h1>
 
           <p className="mt-6 max-w-3xl text-sm leading-7 text-white/70 sm:text-base sm:leading-8 md:text-lg">
@@ -75,37 +78,32 @@ export default function PortfolioPage() {
             <Link
               key={project.slug}
               href={`/portfolio/${project.slug}`}
-              className="group overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-white/[0.04] to-white/[0.02] transition hover:-translate-y-1 hover:border-cyan-300/40"
+              className="group rounded-[2rem] border border-cyan-300/20 bg-gradient-to-br from-white/[0.04] to-white/[0.02] p-7 transition hover:-translate-y-1 hover:border-cyan-300/40"
             >
-              <div className="relative h-60 w-full overflow-hidden border-b border-white/10">
-                <Image
-                  src={project.thumbnail}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
-                <div className="absolute left-5 top-5 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">
-                  {project.status}
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex-1">
+                  <div className="text-xs uppercase tracking-[0.22em] text-cyan-300">
+                    {project.category}
+                  </div>
+
+                  <h3 className="mt-3 text-2xl font-black uppercase leading-tight text-white">
+                    {project.title}
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-7 text-white/65">
+                    {project.summary}
+                  </p>
+                </div>
+
+                <div className="shrink-0">
+                  <div className="min-w-[180px] rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-4 text-center text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">
+                    {project.status}
+                  </div>
                 </div>
               </div>
 
-              <div className="p-7">
-                <div className="text-xs uppercase tracking-[0.22em] text-cyan-300">
-                  {project.category}
-                </div>
-
-                <h3 className="mt-3 text-2xl font-black uppercase leading-tight text-white">
-                  {project.title}
-                </h3>
-
-                <p className="mt-4 text-sm leading-7 text-white/65">
-                  {project.summary}
-                </p>
-
-                <div className="mt-6 text-sm font-bold uppercase tracking-[0.14em] text-white/70 transition group-hover:text-cyan-300">
-                  Open Featured Project
-                </div>
+              <div className="mt-6 text-sm font-bold uppercase tracking-[0.14em] text-white/70 transition group-hover:text-cyan-300">
+                Open Featured Project
               </div>
             </Link>
           ))}
@@ -166,8 +164,11 @@ export default function PortfolioPage() {
         </div>
 
         <div className="mb-6 text-sm text-white/55">
-          Showing <span className="font-semibold text-white">{filteredProjects.length}</span> project
-          {filteredProjects.length === 1 ? "" : "s"}
+          Showing{" "}
+          <span className="font-semibold text-white">
+            {filteredProjects.length}
+          </span>{" "}
+          project{filteredProjects.length === 1 ? "" : "s"}
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -175,42 +176,37 @@ export default function PortfolioPage() {
             <Link
               key={project.slug}
               href={`/portfolio/${project.slug}`}
-              className="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] transition hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-white/[0.045]"
+              className="group rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 transition hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-white/[0.045]"
             >
-              <div className="relative h-56 w-full overflow-hidden border-b border-white/10">
-                <Image
-                  src={project.thumbnail}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <div className="absolute right-5 top-5 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">
-                  {project.status}
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex-1">
+                  <div className="text-xs uppercase tracking-[0.22em] text-cyan-300">
+                    {project.category}
+                  </div>
+
+                  <h3 className="mt-3 text-2xl font-black uppercase leading-tight text-white">
+                    {project.title}
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-7 text-white/65">
+                    {project.summary}
+                  </p>
+                </div>
+
+                <div className="shrink-0">
+                  <div className="min-w-[180px] rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-4 text-center text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">
+                    {project.status}
+                  </div>
                 </div>
               </div>
 
-              <div className="p-7">
-                <div className="text-xs uppercase tracking-[0.22em] text-cyan-300">
-                  {project.category}
-                </div>
+              <div className="mt-6 text-sm text-white/55">
+                <span className="font-semibold text-white/80">Client Type:</span>{" "}
+                {project.clientType}
+              </div>
 
-                <h3 className="mt-3 text-2xl font-black uppercase leading-tight text-white">
-                  {project.title}
-                </h3>
-
-                <p className="mt-4 text-sm leading-7 text-white/65">
-                  {project.summary}
-                </p>
-
-                <div className="mt-6 text-sm text-white/55">
-                  <span className="font-semibold text-white/80">Client Type:</span>{" "}
-                  {project.clientType}
-                </div>
-
-                <div className="mt-6 text-sm font-bold uppercase tracking-[0.14em] text-white/70 transition group-hover:text-cyan-300">
-                  View Project Details
-                </div>
+              <div className="mt-6 text-sm font-bold uppercase tracking-[0.14em] text-white/70 transition group-hover:text-cyan-300">
+                View Project Details
               </div>
             </Link>
           ))}
