@@ -21,14 +21,14 @@ export default function SiteShell({
     <div className="relative min-h-screen text-white">
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0f1c]/80 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center">
             <Image
               src="/images/logo-black.png"
               alt="BluGrid Systems"
-              width={140}
-              height={40}
+              width={220}
+              height={60}
               priority
-              className="h-auto w-[120px] md:w-[140px]"
+              className="h-auto w-[170px] md:w-[220px]"
             />
           </Link>
 
