@@ -1,60 +1,85 @@
-"use client";
-
-export default function Footer() {
+export default function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-neutral-800 bg-black/40 backdrop-blur">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <footer className="border-t border-white/10 bg-black text-white">
+      <div className="mx-auto max-w-7xl px-6 py-12">
 
         {/* Top Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
 
           {/* Brand */}
-          <div className="max-w-sm">
-            <h3 className="text-lg font-semibold text-white tracking-tight">
-              BluGrid Systems
-            </h3>
-            <p className="text-sm text-neutral-400 mt-3 leading-relaxed">
+          <div>
+            <h3 className="text-lg font-semibold mb-3">BluGrid Systems</h3>
+            <p className="text-white/60 text-sm leading-relaxed">
               Custom software, automation systems, and AI infrastructure engineered
               for businesses that demand performance, efficiency, and scale.
             </p>
           </div>
 
           {/* Navigation */}
-          <div className="grid grid-cols-2 gap-8 text-sm text-neutral-400">
-            <div className="flex flex-col gap-2">
-              <span className="text-white font-medium mb-2">Navigation</span>
-              <a href="/" className="hover:text-white transition">Home</a>
-              <a href="/services" className="hover:text-white transition">Services</a>
-              <a href="/portfolio" className="hover:text-white transition">Portfolio</a>
-              <a href="/assistant" className="hover:text-white transition">AI Assistant</a>
-            </div>
+          <div>
+            <h4 className="text-sm font-semibold mb-3 text-white/80">Navigation</h4>
+            <ul className="space-y-2 text-sm text-white/60">
+              <li><a href="/" className="hover:text-white">Home</a></li>
+              <li><a href="/services" className="hover:text-white">Services</a></li>
+              <li><a href="/portfolio" className="hover:text-white">Portfolio</a></li>
+              <li><a href="/ai-assistant" className="hover:text-white">AI Assistant</a></li>
+            </ul>
+          </div>
 
-            <div className="flex flex-col gap-2">
-              <span className="text-white font-medium mb-2">Company</span>
-              <a href="/about" className="hover:text-white transition">About</a>
-              <a href="/contact" className="hover:text-white transition">Contact</a>
-              <a href="/tools" className="hover:text-white transition">Tools</a>
-            </div>
+          {/* Company */}
+          <div>
+            <h4 className="text-sm font-semibold mb-3 text-white/80">Company</h4>
+            <ul className="space-y-2 text-sm text-white/60">
+              <li><a href="/about" className="hover:text-white">About</a></li>
+              <li><a href="/contact" className="hover:text-white">Contact</a></li>
+              <li><a href="/tools" className="hover:text-white">Tools</a></li>
+            </ul>
           </div>
 
         </div>
 
         {/* Divider */}
-        <div className="border-t border-neutral-800 my-10" />
+        <div className="border-t border-white/10 my-6" />
 
-        {/* Disclaimer */}
-        <p className="text-xs text-neutral-500 leading-relaxed text-center max-w-4xl mx-auto">
-          Disclaimer & POPIA Notice: This email and any attachments are intended for the recipient only. 
-          If you’ve received it by mistake, please notify us and delete it immediately; any unauthorised 
-          use or disclosure is prohibited. Any personal information shared here is handled in line with 
-          the Protection of Personal Information Act (POPIA). Please ensure you also process this information 
-          only for its intended purpose and keep it confidential. BluGrid Systems employees are required 
-          to comply with all relevant legislation, including the ECTA and POPIA; any breach of these laws 
-          or internal communication policies is deemed a breach of company policy and subject to disciplinary action.
-        </p>
+        {/* Privacy Notice (Requested) */}
+        <div
+          className="text-white/50 text-center max-w-5xl mx-auto"
+          style={{
+            fontFamily: '"Segoe UI", Arial, sans-serif',
+            fontSize: "8pt",
+            lineHeight: "1.5",
+          }}
+        >
+          <p>
+            <span className="font-semibold">Privacy Notice:</span> BluGrid Systems (Pty) Ltd is
+            committed to safeguarding your personal information in full compliance with the{" "}
+            <span className="font-semibold">Protection of Personal Information Act (POPIA)</span> of
+            South Africa and the{" "}
+            <span className="font-semibold">
+              European Union General Data Protection Regulation (GDPR)
+            </span>
+            . All data collected is processed lawfully, securely, and transparently, with strict
+            safeguards to ensure confidentiality, integrity, and compliance with international
+            standards.
+          </p>
 
-        {/* Bottom Bar */}
-        <div className="mt-10 text-center text-xs text-neutral-600">
+          <p className="mt-2">
+            For any requests or further information, please contact our Information Officer at{" "}
+            <a
+              href="mailto:info@blugridsystems.com"
+              className="text-cyan-300 underline"
+              style={{
+                fontFamily: '"Segoe UI", Arial, sans-serif',
+                fontSize: "8pt",
+              }}
+            >
+              info@blugridsystems.com
+            </a>
+          </p>
+        </div>
+
+        {/* Bottom */}
+        <div className="text-center text-white/40 text-xs mt-6">
           © {new Date().getFullYear()} BluGrid Systems. All rights reserved.
         </div>
 
