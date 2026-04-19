@@ -17,13 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white antialiased">
-        <div className="min-h-screen flex flex-col">
+        <div className="site-grid" />
+        <div className="site-noise" />
+        <div className="min-h-screen flex flex-col relative">
           <main className="flex-1">{children}</main>
           <SiteFooter />
         </div>
       </body>
-
-      {/* Google Analytics */}
       <GoogleAnalytics gaId="G-KLVXH4B4R5" />
     </html>
   );
