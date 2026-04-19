@@ -99,10 +99,10 @@ export default function CookieConsent() {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
 
       <div
-        className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-cyan-300/25 bg-[#08111f]/95 text-white shadow-[0_0_80px_rgba(0,0,0,0.8)] backdrop-blur-xl"
+        className="relative w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-2xl border border-cyan-300/25 bg-[#08111f]/95 text-white shadow-[0_0_80px_rgba(0,0,0,0.8)] backdrop-blur-xl"
         style={{ fontFamily: '"Segoe UI", Arial, sans-serif' }}
       >
         <div className="border-b border-white/10 px-5 py-4">
@@ -142,7 +142,7 @@ export default function CookieConsent() {
           </div>
         </div>
 
-        <div className="px-5 py-4">
+        <div className="px-5 py-3 pb-5">
           <div className="mb-4 border-b border-cyan-300/30 pb-3 text-[16px] font-bold text-white">
             Manage Cookie Preferences
           </div>
@@ -178,7 +178,7 @@ export default function CookieConsent() {
             />
           </div>
 
-          <div className="mt-5 grid gap-3 md:grid-cols-3">
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
             <button
               type="button"
               onClick={handleAcceptAll}
@@ -269,7 +269,7 @@ function CookieRow({
         </div>
       </div>
 
-      <div className="flex items-center border-l border-white/10 px-4">
+      <div className="flex items-center border-l border-white/10 px-5">
         <button
           type="button"
           onClick={onChange}
