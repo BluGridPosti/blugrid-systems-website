@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import SiteFooter from "@/components/layout/site-footer";
 
 export const metadata: Metadata = {
@@ -21,6 +22,9 @@ export default function RootLayout({
           <SiteFooter />
         </div>
       </body>
+
+      {/* Google Analytics */}
+      <GoogleAnalytics gaId="G-KLVXH4B4R5" />
     </html>
   );
 }
