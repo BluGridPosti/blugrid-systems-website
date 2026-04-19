@@ -35,13 +35,15 @@ export default function CookieConsent() {
     }
 
     try {
-      const parsed = JSON.parse(saved) as CookiePreferences;
+      const parsed = JSON.parse(saved) as Partial<CookiePreferences>;
+
       setPreferences({
         essential: true,
         analytics: Boolean(parsed.analytics),
         marketing: Boolean(parsed.marketing),
         functional: Boolean(parsed.functional),
       });
+
       setIsOpen(false);
     } catch {
       setIsOpen(true);
@@ -50,7 +52,9 @@ export default function CookieConsent() {
 
   const hasOptionalCookiesEnabled = useMemo(() => {
     return (
-      preferences.analytics || preferences.marketing || preferences.functional
+      preferences.analytics ||
+      preferences.marketing ||
+      preferences.functional
     );
   }, [preferences]);
 
@@ -94,22 +98,24 @@ export default function CookieConsent() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-4 z-[100] px-4 sm:bottom-6 sm:px-6">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+
       <div
-        className="mx-auto w-full max-w-5xl overflow-hidden rounded-[1.75rem] border border-cyan-300/25 bg-[#08111f]/95 text-white shadow-[0_0_60px_rgba(0,0,0,0.55)] backdrop-blur-xl"
+        className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-cyan-300/25 bg-[#08111f]/95 text-white shadow-[0_0_80px_rgba(0,0,0,0.8)] backdrop-blur-xl"
         style={{ fontFamily: '"Segoe UI", Arial, sans-serif' }}
       >
-        <div className="border-b border-white/10 px-6 py-5 sm:px-8">
+        <div className="border-b border-white/10 px-5 py-4">
           <div className="text-center">
-            <div className="text-[26px] font-black uppercase tracking-[0.04em] text-white">
+            <div className="text-[22px] font-black uppercase tracking-[0.04em] text-white">
               Cookie Consent
             </div>
-            <div className="mt-2 text-[18px] font-semibold text-white/90">
+            <div className="mt-1 text-[16px] font-semibold text-white/90">
               We Value Your Privacy
             </div>
           </div>
 
-          <div className="mt-6 space-y-5 text-[15px] leading-8 text-white/80">
+          <div className="mt-4 space-y-4 text-[14px] leading-7 text-white/80">
             <p>
               <span className="font-semibold text-white">
                 BluGrid Systems (Pty) Ltd
@@ -136,8 +142,8 @@ export default function CookieConsent() {
           </div>
         </div>
 
-        <div className="px-6 py-5 sm:px-8">
-          <div className="mb-4 border-b border-cyan-300/30 pb-3 text-[18px] font-bold text-white">
+        <div className="px-5 py-4">
+          <div className="mb-4 border-b border-cyan-300/30 pb-3 text-[16px] font-bold text-white">
             Manage Cookie Preferences
           </div>
 
@@ -145,8 +151,8 @@ export default function CookieConsent() {
             <CookieRow
               title="Essential Cookies (Always Active)"
               description="Required for security and core site functions."
-              checked
-              disabled
+              checked={true}
+              disabled={true}
               onChange={() => undefined}
             />
 
@@ -172,14 +178,14 @@ export default function CookieConsent() {
             />
           </div>
 
-          <div className="mt-6 grid gap-3 md:grid-cols-3">
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
             <button
               type="button"
               onClick={handleAcceptAll}
-              className="rounded-xl border border-cyan-300 bg-cyan-300 px-5 py-4 text-center text-[15px] font-bold text-black transition hover:opacity-95"
+              className="rounded-xl border border-cyan-300 bg-cyan-300 px-4 py-3 text-center text-sm font-bold text-black transition hover:opacity-95"
             >
               Accept All
-              <div className="mt-1 text-[12px] font-medium text-black/75">
+              <div className="mt-1 text-[11px] font-medium text-black/75">
                 You consent to all cookies
               </div>
             </button>
@@ -187,10 +193,10 @@ export default function CookieConsent() {
             <button
               type="button"
               onClick={handleSaveCustom}
-              className="rounded-xl border border-white/15 bg-white/[0.05] px-5 py-4 text-center text-[15px] font-bold text-white transition hover:border-cyan-300/40 hover:bg-white/[0.08]"
+              className="rounded-xl border border-white/15 bg-white/[0.05] px-4 py-3 text-center text-sm font-bold text-white transition hover:border-cyan-300/40 hover:bg-white/[0.08]"
             >
               Save Preferences
-              <div className="mt-1 text-[12px] font-medium text-white/60">
+              <div className="mt-1 text-[11px] font-medium text-white/60">
                 Save selected cookie preferences
               </div>
             </button>
@@ -198,39 +204,39 @@ export default function CookieConsent() {
             <button
               type="button"
               onClick={handleRejectNonEssential}
-              className="rounded-xl border border-white/15 bg-white/[0.05] px-5 py-4 text-center text-[15px] font-bold text-white transition hover:border-cyan-300/40 hover:bg-white/[0.08]"
+              className="rounded-xl border border-white/15 bg-white/[0.05] px-4 py-3 text-center text-sm font-bold text-white transition hover:border-cyan-300/40 hover:bg-white/[0.08]"
             >
               Reject Non-Essential
-              <div className="mt-1 text-[12px] font-medium text-white/60">
+              <div className="mt-1 text-[11px] font-medium text-white/60">
                 Continue with only necessary cookies
               </div>
             </button>
           </div>
 
-          <div className="mt-4 grid gap-2 text-center text-[13px] font-semibold sm:grid-cols-3">
+          <div className="mt-4 grid gap-2 text-center text-[12px] font-semibold sm:grid-cols-3">
             <a
               href="/popia-paia-manual"
-              className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-cyan-300 underline underline-offset-2 transition hover:bg-white/[0.06]"
+              className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-cyan-300 underline underline-offset-2 transition hover:bg-white/[0.06]"
             >
               POPIA &amp; PAIA Manual
             </a>
 
             <a
               href="/privacy-policy"
-              className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-cyan-300 underline underline-offset-2 transition hover:bg-white/[0.06]"
+              className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-cyan-300 underline underline-offset-2 transition hover:bg-white/[0.06]"
             >
               Privacy Policy (GDPR)
             </a>
 
             <a
               href="/cookie-policy"
-              className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-cyan-300 underline underline-offset-2 transition hover:bg-white/[0.06]"
+              className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-cyan-300 underline underline-offset-2 transition hover:bg-white/[0.06]"
             >
               Cookie Policy
             </a>
           </div>
 
-          <div className="mt-4 text-center text-[12px] text-white/45">
+          <div className="mt-4 text-center text-[11px] text-white/45">
             {hasOptionalCookiesEnabled
               ? "Optional cookies are currently enabled in your selected preferences."
               : "Only essential cookies will be used unless you choose otherwise."}
@@ -256,14 +262,14 @@ function CookieRow({
 }) {
   return (
     <div className="grid grid-cols-[1fr_auto] border-b border-white/10 last:border-b-0">
-      <div className="px-5 py-4">
-        <div className="text-[15px] font-bold text-white">{title}</div>
-        <div className="mt-1 text-[14px] leading-6 text-white/60">
+      <div className="px-4 py-3">
+        <div className="text-sm font-bold text-white">{title}</div>
+        <div className="mt-1 text-[13px] leading-6 text-white/60">
           {description}
         </div>
       </div>
 
-      <div className="flex items-center border-l border-white/10 px-5">
+      <div className="flex items-center border-l border-white/10 px-4">
         <button
           type="button"
           onClick={onChange}
