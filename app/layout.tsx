@@ -17,15 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-black text-white antialiased">
         <div className="min-h-screen flex flex-col">
-
-          {/* Main Content */}
-          <main className="flex-1">
-            {children}
-          </main>
-
-          {/* Footer */}
+          <main className="flex-1">{children}</main>
           <SiteFooter />
-
         </div>
       </body>
     </html>
