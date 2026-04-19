@@ -1,23 +1,32 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import type { Metadata } from "next";
+import SiteFooter from "@/components/layout/site-footer";
 
 export const metadata: Metadata = {
   title: "BluGrid Systems",
   description:
-    "BluGrid Systems builds custom business systems, automation engines, AI assistants, dashboards, and operational infrastructure.",
+    "Custom software, automation systems, and AI infrastructure engineered for scale.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body>
-        <div className="site-grid" />
-        <div className="site-noise" />
-        {children}
+      <body className="bg-black text-white antialiased">
+        <div className="min-h-screen flex flex-col">
+
+          {/* Main Content */}
+          <main className="flex-1">
+            {children}
+          </main>
+
+          {/* Footer */}
+          <SiteFooter />
+
+        </div>
       </body>
     </html>
   );
